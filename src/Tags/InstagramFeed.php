@@ -10,6 +10,10 @@ class InstagramFeed extends Tags
 {
     public function index()
     {
+        if (empty(config('instagram-feed.username')) || empty(config('instagram-feed.password'))) {
+            return [];
+        }
+
         $cachePool = new FilesystemAdapter('Instagram', 0, config('cache.stores.file.path'));
 
         $api = new Api($cachePool);
